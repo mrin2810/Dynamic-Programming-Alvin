@@ -1,4 +1,5 @@
 const fib = (n, memoized = {}) => {
+  // if (n in memoized) {
   if (memoized.hasOwnProperty(n)) {
     return memoized[n];
   }

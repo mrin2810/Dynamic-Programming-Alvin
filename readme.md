@@ -29,6 +29,7 @@ Space complexity becomes `O(N)`
 
 ```javascript
 const fib = (n, memoized = {}) => {
+  // if (n in memoized) {
   if (memoized.hasOwnProperty(n)) {
     // if memoized, return the same answer to avoid duplicate subtree creation
     return memoized[n];
