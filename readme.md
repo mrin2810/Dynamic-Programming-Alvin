@@ -38,11 +38,13 @@ const fib = (n, memoized = {}) => {
     // base case
     return 1;
   }
-  const ans = fib(n - 1, memoized) + fib(n - 2, memoized);
-  memoized[n] = ans; // when you calculate the answer store it in the memoized map.
-  return ans;
+  memoized[n] = fib(n - 1, memoized) + fib(n - 2, memoized);
+  // when you calculate the answer store it in the memoized map.
+  return memoized[n];
 };
 ```
+
+Now for the memoized algorithm we still have space complexity of `O(N)` but, we managed to reduce time complexity to `O(N)`
 
 # Index
 

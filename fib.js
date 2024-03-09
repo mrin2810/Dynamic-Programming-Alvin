@@ -6,9 +6,8 @@ const fib = (n, memoized = {}) => {
   if (n <= 2) {
     return 1;
   }
-  const ans = fib(n - 1, memoized) + fib(n - 2, memoized);
-  memoized[n] = ans;
-  return ans;
+  memoized[n] = fib(n - 1, memoized) + fib(n - 2, memoized);
+  return memoized[n];
 };
 
 // Main implementation
