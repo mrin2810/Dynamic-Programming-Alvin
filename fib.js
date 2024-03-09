@@ -18,5 +18,3 @@ const fib = (n, memoized = {}) => {
 console.log(fib(50));
 // Lets talk about the time complexity
 console.log(`\nTime Complexity: O()`);
-
-console.log;
