@@ -93,13 +93,67 @@ const gridTraveller = (m, n, memo = {}) => {
 Time Complexity: `O(N * M)`
 Space Complexity: `O(N + M)`
 
+# canSum
+
+Write a function `canSum(targetSum, numbers)` that takes in a targetSum and an array of numbers as arguments.
+The function should return a boolean indicating whether or not it is possible to generate the targetSum using numbers from the array.
+
+```javascript
+const canSum = (target, arr) => {
+  if (target === 0) {
+    return true;
+  }
+  if (target < 0) {
+    return false;
+  }
+  for (let num of arr) {
+    const remainder = target - num;
+    if (canSum(remainder, arr) === true) {
+      return true;
+    }
+  }
+  return false;
+};
+```
+
+m = target
+n = length of arr
+height = m
+branching factor = \*n
+Time Complexity: `O(n^m)`
+Space Complexity: `O(m)`
+
+## Memoized
+
+```javascript
+const canSum = (target, arr, memo = {}) => {
+  if (target in memo) {
+    return memo[target];
+  }
+  if (target === 0) {
+    return true;
+  }
+  if (target < 0) {
+    return false;
+  }
+  for (let num of arr) {
+    const remainder = target - num;
+    if (canSum(remainder, arr, memo) === true) {
+      memo[target] = true;
+      return memo[target];
+    }
+  }
+  memo[target] = false;
+  return memo[target];
+};
+```
+
 # Index
 
-| File Name        | Description                                                     |
-| ---------------- | --------------------------------------------------------------- |
-| [fib.js](fib.js) | Write a function 'fib(n) that takes in a number as an argument. |
-|                  | The function should return the n-th number of the Fibonacci     |
-|                  | sequence.                                                       |
-| [fib.js](fib.js) | Write a function 'fib(n) that takes in a number as an argument. |
-|                  | The function should return the n-th number of the Fibonacci     |
-|                  | sequence.                                                       |
+| File Name                            | Description                                                     |
+| ------------------------------------ | --------------------------------------------------------------- |
+| [fib.js](fib.js)                     | Write a function 'fib(n) that takes in a number as an argument. |
+|                                      | The function should return the n-th number of the Fibonacci     |
+|                                      | sequence.                                                       |
+| [gridTraveller.js](gridTraveller.js) |                                                                 |
+| [canSum.js](canSum.js)               |                                                                 |
