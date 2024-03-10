@@ -46,10 +46,60 @@ const fib = (n, memoized = {}) => {
 
 Now for the memoized algorithm we still have space complexity of `O(N)` but, we managed to reduce time complexity to `O(N)`
 
+# gridTraveller
+
+Problem Statement: Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travel to the bottom-right corner. You may only move down or right.
+In how many ways can you travel to the goal on a grid with dimensions m \* n?
+
+## Recursive Approach
+
+```javascript
+const gridTraveller = (m, n) => {
+  if (m === 0 || n === 0) {
+    return 0;
+  }
+  if (m === 1 && n === 1) {
+    return 1;
+  }
+  return gridTraveller(m - 1, n) + gridTraveller(m, n - 1);
+};
+```
+
+Time Complexity: `O(2^m+n)`
+Space Complexity: `O(N + M)`
+
+## Memoization
+
+While memoizing the gridTraveller problem, we can consider (2, 1) to be same as (1, 2)
+Let's do it!
+
+```javascript
+const gridTraveller = (m, n, memo = {}) => {
+  let id = m + "," + n;
+  if (id in memo) {
+    return memo[id];
+  }
+  if (m === 0 || n === 0) {
+    return 0;
+  }
+  if (m === 1 && n === 1) {
+    return 1;
+  }
+  memo[id] = gridTraveller(m - 1, n, memo) + gridTraveller(m, n - 1, memo);
+  return memo[id];
+};
+```
+
+Time Complexity: `O(N * M)`
+Space Complexity: `O(N + M)`
+
 # Index
 
 | File Name        | Description                                                     |
 | ---------------- | --------------------------------------------------------------- |
+| [fib.js](fib.js) | Write a function 'fib(n) that takes in a number as an argument. |
+|                  | The function should return the n-th number of the Fibonacci     |
+|                  | sequence.                                                       |
 | [fib.js](fib.js) | Write a function 'fib(n) that takes in a number as an argument. |
 |                  | The function should return the n-th number of the Fibonacci     |
 |                  | sequence.                                                       |
